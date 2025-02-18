@@ -53,7 +53,7 @@ const Profile = ({user}) => {
       padding="8"
     >
       <VStack>
-        <Avatar boxSize={'48'} src={user.avatar.url} />
+        <Avatar boxSize={'48'} src={user?.avatar?.url} />
         <Button onClick={onOpen}  colorScheme={'yellow'} variant="ghost">
           Change Photo
         </Button>
