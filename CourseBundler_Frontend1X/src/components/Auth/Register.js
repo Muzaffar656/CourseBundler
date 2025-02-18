@@ -47,7 +47,7 @@ const dispatch = useDispatch()
         setImage(file)
       };
     };
-    const submitHandler  = (e)=>{
+    const submitHandler  = async (e)=>{
       e.preventDefault()
       const myform = new FormData()
       myform.append('name',name)
@@ -55,7 +55,8 @@ const dispatch = useDispatch()
       myform.append('password',password)
       myform.append('file',image)
 
-dispatch(register(myform))
+ 
+      dispatch(register(myform))
 
     }
   return (
