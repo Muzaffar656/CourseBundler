@@ -19,4 +19,4 @@ const store = configureStore({
 
 export default store
 
-export const server =  process.env.REACT_APP_URL || 'http://localhost:7000/api/v1'
+export const server =  `${process.env.REACT_APP_URL}/api/v1` || 'http://localhost:7000/api/v1'
