@@ -21,8 +21,8 @@ const stripeSession = async (plan) => {
           quantity: 1,
         },
       ],
-      success_url: "http://localhost:3000/paymentsuccess",
-      cancel_url: "http://localhost:3000/paymentfail",
+      success_url: "https://coursebundler-1-waq8.onrender.com/paymentsuccess",
+      cancel_url: "https://coursebundler-1-waq8.onrender.com/paymentfail",
     });
     return session;
   } catch (error) {
