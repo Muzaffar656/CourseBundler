@@ -51,7 +51,7 @@ function App() {
   }, [dispatch]);
 
   const ProtectedRoute = ({ children }) => {
-    if (!isAuthenticate) {
+    if (!isAuthenticate||!user) {
       return <Navigate to="/login" replace />;
     }
     if (user && !user.isVerified) {
