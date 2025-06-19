@@ -52,7 +52,7 @@ function App() {
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticate, user, loading } = useSelector((state) => state.user);
-
+console.log(isAuthenticate,user,loading + 'PROTED ROUTE')
   // ✅ Wait until user is loaded
   if (loading) return <Loader />;
 
@@ -89,7 +89,7 @@ const ProtectedRoute = ({ children }) => {
               path="/course/:id"
               element={
                 <ProtectedRoute>
-                  <CoursePage user={user} />
+                  <CoursePage/>
                 </ProtectedRoute>
               }
             />
