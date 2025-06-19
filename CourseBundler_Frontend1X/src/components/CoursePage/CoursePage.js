@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 
 const CoursePage = ({user}) => {
     const [lectureNumber, setLectureNumber] = useState(0);
-  if (!user) return <Navigate to="/login" replace />;
+  if (!user) return null
 
 if (
   user.role !== 'admin' &&
