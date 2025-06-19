@@ -1,7 +1,11 @@
 import {createReducer} from '@reduxjs/toolkit'
 
 
-export const userReducer = createReducer({},
+export const userReducer = createReducer( {
+  loading: true,              // ✅ ensures ProtectedRoute waits
+  isAuthenticate: false,
+  user: null,
+},
     
     {
         loginRequest:state =>{
