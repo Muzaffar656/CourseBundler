@@ -27,13 +27,14 @@ export const Course = ({
   lectureCount,
   loading,
 }) => {
-  const {user} = useSelector(state=>state.user)
-  const navigate = useNavigate()
+  const { user } = useSelector(state => state.user);
+  const navigate = useNavigate();
   const handelNavigate = id => {
-    if(!user){
-   return   navigate('/login')
+    if (user===undefined) {
+      return navigate('/login');
+    } else {
+      navigate(`/course/${id}`);
     }
-navigate(`/course/${id}`)
   };
   return (
     <>
