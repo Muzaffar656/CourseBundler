@@ -9,7 +9,7 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import '../Home/Home.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCourses } from '../../Redux/actions/course';
 import { toast } from 'react-hot-toast';
@@ -27,6 +27,14 @@ export const Course = ({
   lectureCount,
   loading,
 }) => {
+  const {user} = useSelector(state=>state.user)
+  const navigate = useNavigate()
+  const handelNavigate = id => {
+    if(!user){
+   return   navigate('/login')
+    }
+navigate(`/course/${id}`)
+  };
   return (
     <>
       <div className=" course items-start flex flex-col gap-1 mt-5">
@@ -66,11 +74,11 @@ export const Course = ({
           textTransform="uppercase"
         />
         <Stack direction={['column', 'row']} alignItems="center">
-          <Link to={`/course/${id}`}>
-            <Button colorScheme={'yellow'} >
-              Watch Now
-            </Button>
-          </Link>
+          {/* <Link to={`/course/${id}`}> */}
+          <Button onClick={() => handelNavigate(id)} colorScheme={'yellow'}>
+            Watch Now
+          </Button>
+          {/* </Link> */}
           <Button
             isLoading={loading}
             variant={'ghost'}
@@ -113,7 +121,7 @@ const Courses = () => {
   }, [category, keyword, dispatch, message, error]);
   const addToPlaylistHandler = async id => {
     await dispatch(addToPlaylist(id));
-     dispatch(loadUser());
+    dispatch(loadUser());
   };
   return (
     <div>

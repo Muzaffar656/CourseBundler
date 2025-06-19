@@ -8,7 +8,7 @@ const CoursePage = ({user}) => {
   if (!user) return null
 
 if (
-  user.role !== 'admin' &&
+ user &&  user.role !== 'admin' &&
   (!user.subscription || user.subscription.status !== 'open')
 ) {
   return <Navigate to="/subscribe" replace />;
