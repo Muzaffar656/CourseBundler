@@ -50,15 +50,23 @@ function App() {
     dispatch(loadUser());
   }, [dispatch]);
 
-  const ProtectedRoute = ({ children }) => {
-    if (!isAuthenticate||!user) {
-      return <Navigate to="/login" replace />;
-    }
-    if (user && !user.isVerified) {
-      return <Navigate to="/verifyEmail" replace />;
-    }
-    return children;
-  };
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticate, user, loading } = useSelector((state) => state.user);
+
+  // ✅ Wait until user is loaded
+  if (loading) return <Loader />;
+
+  if (!isAuthenticate || !user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (!user.isVerified) {
+    return <Navigate to="/verifyEmail" replace />;
+  }
+
+  return children;
+};
+
 
   const AuthRoute = ({ children }) => {
     if (isAuthenticate && user?.isVerified) {

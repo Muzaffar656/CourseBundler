@@ -8,10 +8,8 @@ const CoursePage = () => {
   const { user, loading } = useSelector(state => state.user);
   const [lectureNumber, setLectureNumber] = useState(0);
 
-  // ✅ Handle loading state properly
   if (loading) return <p>Loading...</p>;
 
-  // ✅ Safe null check BEFORE accessing user.role
   if (!user) return <Navigate to="/login" replace />;
 
   const isSubscribed = user.subscription && user.subscription.status === 'open';
