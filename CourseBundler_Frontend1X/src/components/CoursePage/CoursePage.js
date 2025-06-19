@@ -2,10 +2,12 @@ import React,{useState} from 'react'
 import {Grid,Box,Heading, VStack,Button,Text} from '@chakra-ui/react'
 import introVideo from '../../assets/videos/intro.mp4';
 import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const CoursePage = ({user}) => {
+const CoursePage = () => {
+     const {user} = useSelector(state=>state.user)
     const [lectureNumber, setLectureNumber] = useState(0);
-  if (!user) return null
+  if (!user)  return <Navigate to="/login" replace />;
 
 if (
  user &&  user.role !== 'admin' &&
