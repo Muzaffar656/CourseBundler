@@ -5,10 +5,14 @@ import { Navigate } from 'react-router-dom';
 
 const CoursePage = ({user}) => {
     const [lectureNumber, setLectureNumber] = useState(0);
-console.log(user)
-   if(user.role !=="admin" &&( user.subscription === undefined || user.subscription.status !== 'open')){
-   return <Navigate to={'/subscribe'}/>
-   } 
+  if (!user) return <Navigate to="/login" replace />;
+
+if (
+  user.role !== 'admin' &&
+  (!user.subscription || user.subscription.status !== 'open')
+) {
+  return <Navigate to="/subscribe" replace />;
+}
 
     const lectures = [
         {
