@@ -20,7 +20,7 @@ app.use(cookieParser())
 //Cors for frontend connectivity
 app.use(
     cors({
-      origin: ["http://localhost:3001", "https://coursebundler-1-waq8.onrender.com"],
+      origin: ["http://localhost:3000", "https://coursebundler-1-waq8.onrender.com"],
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE"],
     })

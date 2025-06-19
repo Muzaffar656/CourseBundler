@@ -100,7 +100,7 @@ export const CancelSubscribe = catchAsyncError(async (req, res, next) => {
   
   const user = await User.findById(req.user._id);
   console.log(user + 'user')
-  const subscriptionID = user.subscription.id;
+  const subscriptionID = user.subscription.session_id;
   // let refund = false;
   // await instance.subscriptions.cancel(subscriptionID);
   // const payment = await Payment.findOne({
@@ -122,7 +122,7 @@ export const CancelSubscribe = catchAsyncError(async (req, res, next) => {
   res.status(200).json({
     success: true,
     message:  "Subscription Canelled Refund amount wiil be transferd in your bank account"
-      //  "sorry your refund is not tranfer because refund tranfer in 7 days ",
+    
   });
 });
 

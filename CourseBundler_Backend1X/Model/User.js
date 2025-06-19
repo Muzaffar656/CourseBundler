@@ -53,6 +53,12 @@ const schema = new mongoose.Schema({
         type:Date,
         default:Date.now
     },
+    isVerified:{
+        type:Boolean,
+        default : false
+    },
+    otp: {type:Number},
+    otpExpiry :{type :  Date},
     resetPasswordToken:String,
 resetPasswordExpire:String
 })
