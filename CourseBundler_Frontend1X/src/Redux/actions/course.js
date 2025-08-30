@@ -21,10 +21,10 @@ export const getCourseLectures = (id)=>async dispatch=>{
             },
             withCredentials:true
         }) 
-        console.log(data)
+     
         dispatch({type:"getCourseLecturesSuccess",payload:data.lectures})
     } catch (error) {
-        console.log(error)
+     
         dispatch({type:"getCourseLecturesFail",payload:error.response.data.message})
     }
 }
@@ -44,7 +44,7 @@ export const addToPlaylist = (id)=> async dispatch=>{
             type:"addToPlaylistSuccess",
             payload:data.message
         })
-        
+   
     } catch (error) {
         dispatch({
             type:"addToPlaylistFail",
@@ -60,7 +60,7 @@ export const  removeFromPlaylist =  (id) => async dispatch =>{
             withCredentials:true
         }
         const {data} = await axios.delete(`${server}/removefromplaylist?id=${id}`,config)
-        console.log(data.message)
+     
         dispatch({type:"removeFromPlaylistSuccess",payload:data.message})
     } catch (error) {
         dispatch({

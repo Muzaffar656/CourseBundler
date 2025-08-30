@@ -21,7 +21,7 @@ const stripeSession = async (plan) => {
           quantity: 1,
         },
       ],
-      success_url: "https://coursebundler-1-waq8.onrender.com/paymentsuccess",
+      success_url: "http://localhost:3000/paymentsuccess",
       cancel_url: "https://coursebundler-1-waq8.onrender.com/paymentfail",
     });
     return session;
@@ -99,8 +99,8 @@ await user.save()
 export const CancelSubscribe = catchAsyncError(async (req, res, next) => {
   
   const user = await User.findById(req.user._id);
-  console.log(user + 'user')
-  const subscriptionID = user.subscription.session_id;
+  const session = await stripe.checkout.sessions.retrieve(user.subscription.session_id);
+  const subscriptionID = session.subscription; // ✅ this is the correct subscription ID
   // let refund = false;
   // await instance.subscriptions.cancel(subscriptionID);
   // const payment = await Payment.findOne({
@@ -115,6 +115,7 @@ export const CancelSubscribe = catchAsyncError(async (req, res, next) => {
   // }
   // await payment.deleteOne();
   const subscription_cancel = await stripe.subscriptions.cancel(subscriptionID)
+ 
   user.subscription.status = undefined;
   user.subscription.id = undefined;
   user.subscription.session_id = undefined

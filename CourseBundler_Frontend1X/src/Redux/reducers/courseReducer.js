@@ -18,10 +18,12 @@ export const courseReducer = createReducer(
         state.loading = true;
       },
       addToPlaylistSuccess: (state, action) => {
+   
         state.loading = false;
         state.message = action.payload;
       },
       addToPlaylistFail: (state, action) => {
+        console.log(action)
         state.loading = false;
         state.error = action.payload;
       },
@@ -29,10 +31,12 @@ export const courseReducer = createReducer(
         state.loading = true
       },
       removeFromPlaylistSuccess : (state,action)=>{
+        console.log(action.payload)
         state.loading = false;
         state.message = action.payload
       },
       removeFromPlaylistFail:(state,action)=>{
+        console.log(action)
         state.loading = false;
           state.error = action.payload
       },

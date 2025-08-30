@@ -26,6 +26,7 @@ export const Course = ({
   description,
   lectureCount,
   loading,
+  user
 }) => {
   return (
     <>
@@ -100,20 +101,23 @@ const Courses = () => {
   const { loading, courses, error, message } = useSelector(
     state => state.courses
   );
+  const {user} = useSelector(state=>state.user)
   useEffect(() => {
-    dispatch(getAllCourses(category, keyword));
-    if (error) {
-      toast.error(error);
-      dispatch({ type: 'clearError' });
-    }
-    if (message) {
-      toast.success(message);
-      dispatch({ type: 'clearMessage' });
-    }
-  }, [category, keyword, dispatch, message, error]);
+  
+    dispatch(getAllCourses(category, keyword,dispatch));
+  }, [category, keyword]);
   const addToPlaylistHandler = async id => {
-    await dispatch(addToPlaylist(id));
-     dispatch(loadUser());
+    if(!user){
+      return toast.error('Please login',{
+        duration:1000
+      })
+    }
+   await dispatch(addToPlaylist(id));
+
+ 
+
+       dispatch(loadUser());
+ 
   };
   return (
     <div>
@@ -152,6 +156,7 @@ const Courses = () => {
                 description={item.description}
                 lectureCount={item.numOfVideos}
                 loading={loading}
+                user={user}
               />
             ))
           ) : (

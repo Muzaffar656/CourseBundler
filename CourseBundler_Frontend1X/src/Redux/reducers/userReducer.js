@@ -2,15 +2,16 @@ import {createReducer} from '@reduxjs/toolkit'
 
 
 export const userReducer = createReducer( {
-  loading: true,              // ✅ ensures ProtectedRoute waits
+  loading: false,              
   isAuthenticate: false,
   user: null,
 },
     
     {
         loginRequest:state =>{
+          
             state.loading = true
-            
+
         },
         
         loginSuccess:(state,action) =>{
@@ -160,6 +161,7 @@ export const subscriptionReducer = createReducer({},{
     buySubscriptionSuccess:(state,action)=>{
         state.loading = false
         state.sessionID  = action.payload
+        state.subMessage = 'Payment Done'
     },
     buySubscriptionFail:(state,action)=>{
         state.loading = false
@@ -169,8 +171,9 @@ export const subscriptionReducer = createReducer({},{
         state.loading=true
     },
     cancelSubscriptionSuccess:(state,action)=>{
+    
         state.loading=false
-        state.message=action.payload
+        state.subMessage=action.payload
     },
     cancelSubscriptionFail:(state,action)=>{
         state.loading=false

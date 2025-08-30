@@ -12,22 +12,22 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { server } from '../../Redux/store';
 import { useSelector,useDispatch } from 'react-redux';
-import { loadUser } from '../../Redux/actions/user';
+import { buySubscription, loadUser } from '../../Redux/actions/user';
 
 const PaymentSuccess = () => {
   const dispatch = useDispatch()
 const [id,setId] = useState()
 const {user} = useSelector(state=>state.user)
-let sessionID = user.subscription.session_id
-const data = axios.post(`${server}/paymentverfication`,{sessionID},{
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  withCredentials: true
-}).then(({data})=>{
-  setId(data.subcriptionID)
-  // dispatch(loadUser())
-})
+
+// let sessionID = user.subscription.session_id
+// const data = axios.post(`${server}/paymentverfication`,{sessionID},{
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+//   withCredentials: true
+// }).then(({data})=>{
+//   setId(data.subcriptionID)
+// })
 
   return (
     <Container h={'90vh'} p={['5', '16']} mt={['8', '0']}>
@@ -56,7 +56,7 @@ const data = axios.post(`${server}/paymentverfication`,{sessionID},{
           <Button variant={'ghost'}>Go to profile</Button>
         </Link>
 
-        <Heading size={'xs'}>Reference: {id}</Heading>
+        {/* <Heading size={'xs'}>Reference: {id}</Heading> */}
       </VStack>
     </Container>
   );

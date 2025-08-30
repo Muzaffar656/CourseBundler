@@ -30,46 +30,51 @@ import {loadUser} from './Redux/actions/user'
 import Loader from './components/Layout/Loader/Loader';
 import VerifyEmail from './components/Auth/VerifyEmail';
 
-
+import Cookies from "js-cookie";
 function App() {
   const { isAuthenticate, user, error, message, loading } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  
+  const {subMessage} = useSelector((state) => state.subscription);
+const {message:courseMessage,error:courseError} = useSelector((state)=>state.courses)
+const dispatch = useDispatch();
+   const allReducers  = useSelector(state=>state)
 
-  useEffect(() => {
-    if (message) {
-      toast.success(message);
-      dispatch({ type: 'clearMessage' });
+ 
+
+
+    useEffect(() => {
+   Object.keys(allReducers).forEach((key) => {
+    const slice = allReducers[key];
+
+    if (slice?.message) {
+      toast.success(slice.message);
+      dispatch({ type: "clearMessage", reducer: key });
     }
-    if (error) {
-      toast.error(error);
-      dispatch({ type: 'clearError' });
+
+    if (slice?.error) {
+      toast.error(slice.error);
+      dispatch({ type: "clearError", reducer: key });
     }
-  }, [error, message, dispatch,user]);
+  });
+  }, [allReducers, dispatch,error,message]);
 
-  useEffect(() => {
-    dispatch(loadUser());
-  }, [dispatch]);
-
+ useEffect(() => { const token = Cookies.get("token"); if (token) { dispatch(loadUser()); } }, [dispatch]);
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticate, user, loading } = useSelector((state) => state.user);
-console.log(isAuthenticate,user,loading + 'PROTED ROUTE')
-  // ✅ Wait until user is loaded
-  if (loading) return <Loader />;
+
 
   if (!isAuthenticate || !user) {
     return <Navigate to="/login" replace />;
   }
 
-  if (!user.isVerified) {
-    return <Navigate to="/verifyEmail" replace />;
-  }
+
 
   return children;
 };
 
 
   const AuthRoute = ({ children }) => {
-    if (isAuthenticate && user?.isVerified) {
+    if (isAuthenticate) {
       return <Navigate to={"/"} replace />;
     }
     return children;
@@ -77,9 +82,7 @@ console.log(isAuthenticate,user,loading + 'PROTED ROUTE')
 
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : (
+   
         <>
           <Header isAuthenticate={isAuthenticate} user={user} />
           <Routes>
@@ -174,7 +177,7 @@ console.log(isAuthenticate,user,loading + 'PROTED ROUTE')
           <Footer />
           <Toaster />
         </>
-      )}
+ 
     </>
   );
 }

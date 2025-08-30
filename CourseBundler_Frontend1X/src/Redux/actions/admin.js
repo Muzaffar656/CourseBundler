@@ -29,7 +29,7 @@ export  const createCourse = (myform)=>async dispatch=>{
     }
 }
 export const deleteLecture = (courseId,lectureId)=>async dispatch=>{
-    console.log(courseId,lectureId)
+  
     try {
         dispatch({type:"deleteLectureRequest"})
         
@@ -54,7 +54,7 @@ export const addLecture = (courseId,myform)=>async dispatch=>{
             },
             withCredentials:true
         })
-        console.log(data)
+      
         dispatch({type:"addLectureSuccess",payload:data.message})
     } catch (error) {
         dispatch({type:"addLectureFail",payload:error.response.data.message})

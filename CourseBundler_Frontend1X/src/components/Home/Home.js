@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { startTransition } from 'react';
 
 import { CgGoogle, CgYoutube } from 'react-icons/cg';
 import { SiCoursera, SiUdemy } from 'react-icons/si';
@@ -31,13 +31,14 @@ const Home = () => {
        
         </div>
       </div>
-        <div className=' object-contain sm:mx-44 my-5 shadow-md rounded-md border'>
+        {/* <div className=' object-contain sm:mx-44 my-5 shadow-md rounded-md border'>
           <video src={introVideo} 
+      
             controls
           controlsList="nodownload nofullscreen noremoteplayback"
           disablePictureInPicture
           disableRemotePlayback></video>
-        </div>
+        </div> */}
     </section>
   );
 };

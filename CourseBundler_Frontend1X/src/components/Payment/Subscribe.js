@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
 import {
   VStack,
   Heading,
@@ -8,7 +7,6 @@ import {
   Text,
   Box,
 } from '@chakra-ui/react';
-import { server } from '../../Redux/store';
 import {useDispatch,useSelector} from 'react-redux'
 import { buySubscription } from '../../Redux/actions/user';
 import toast from 'react-hot-toast'
@@ -16,9 +14,9 @@ const Subscribe = () => {
   const {error,sessionID}= useSelector(state=> state.subscription)
   const dispatch = useDispatch()
 const checkout = async () =>{
-  dispatch(buySubscription())
+ await dispatch(buySubscription())
 }
-console.log(sessionID)
+
 useEffect(()=>{
 if(error){
   toast.error(error)

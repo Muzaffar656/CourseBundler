@@ -9,34 +9,31 @@ import { CancelSubscription, loadUser } from '../../Redux/actions/user';
 import toast from 'react-hot-toast';
 import { removeFromPlaylist } from '../../Redux/actions/course';
 
-const Profile = ({user}) => {
-  const {loading, error,message} = useSelector(state=> state.profile)
+const Profile = () => {
+  const {loading} = useSelector(state=> state.profile)
+  const {user} = useSelector(state=>state.user)
+    const { loading:courseLoading } = useSelector(
+      state => state.courses
+    );
  const dispatch = useDispatch()
     const removeFromPlaylistHandler = async(id)=>{
         await dispatch(removeFromPlaylist(id))
-         dispatch(loadUser())
+       await  dispatch(loadUser())
     }
   const { isOpen, onClose, onOpen } = useDisclosure();
   const changeImageSubmitHandler = async (e, image) => {
    e.preventDefault()
+ if(!image){
+ return toast.error('please select image')
+ }
    const myform = new FormData()
    myform.append('file',image)
    await dispatch(updateProfilePicture(myform))
    dispatch(loadUser())
   };
-  useEffect(()=>{
-    if(error){
-      toast.error(error)
-      dispatch({type:"clearError"})
-    }
-    if(message){
-      console.log(message)
-      toast.success(message)
-      dispatch({type:"clearMessage"})
 
-    }
-  },[dispatch,error,message])
-  const handelCancelSubscription = async()=>{
+  const handelCancelSubscription = async(e)=>{
+    e.preventDefault()
   await  dispatch(CancelSubscription())
    dispatch(loadUser())
 
@@ -54,7 +51,7 @@ const Profile = ({user}) => {
     >
       <VStack>
         <Avatar boxSize={'48'} src={user?.avatar?.url} />
-        <Button onClick={onOpen}  colorScheme={'yellow'} variant="ghost">
+        <Button  onClick={onOpen}  colorScheme={'yellow'} variant="ghost">
           Change Photo
         </Button>
       </VStack>
@@ -128,7 +125,7 @@ const Profile = ({user}) => {
                 </Link>
 
                 <Button
-                 
+                 isLoading={courseLoading}
                onClick={()=>{removeFromPlaylistHandler(element.course)}}
                 >
                   <RiDeleteBin7Fill />

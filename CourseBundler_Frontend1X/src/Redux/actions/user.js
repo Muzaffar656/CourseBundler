@@ -35,7 +35,7 @@ export const register = formdata => async dispatch => {
 
     dispatch({ type: 'registerSuccess', payload: data });
   } catch (error) {
-    console.log(error)
+
     dispatch({
       type: 'registerFail',
       payload: error.response.data.message,
@@ -52,10 +52,10 @@ export const loadUser = () => async dispatch => {
 
     dispatch({ type: 'loadUserSuccess', payload: data.user });
   } catch (error) {
-    dispatch({ type: 'loadUserFail', payload: error.response.data.message });
+ 
+    dispatch({ type: 'loadUserFail', payload: error?.response?.data?.message|| 'User not login ' });
   }
 };
-
 export const logout = () => async dispatch => {
   try {
     dispatch({ type: 'logoutRequest' });
@@ -65,7 +65,7 @@ export const logout = () => async dispatch => {
 
     dispatch({ type: 'logoutSuccess', payload: data.message });
   } catch (error) {
-    console.log(error);
+    
     dispatch({ type: 'logoutFail', payload: error.response.message });
   }
 };
@@ -86,7 +86,7 @@ export const buySubscription = () => async dispatch => {
 
     dispatch({ type: 'buySubscriptionSuccess', payload: data });
   } catch (error) {
-    console.log(error);
+ 
     dispatch({
       type: 'buySubscriptionFail',
       payload: error.response.data.message,
@@ -107,10 +107,10 @@ export const CancelSubscription = () => async dispatch => {
       }
     );
 
-    dispatch({ type: 'cancelSubscriptionSuccess', payload: data });
-    console.log(data)
+    dispatch({ type: 'cancelSubscriptionSuccess', payload: data.message });
+   
   } catch (error) {
-    console.log(error);
+ 
     dispatch({
       type: 'cancelSubscriptionFail',
       payload: error.response.data.message,

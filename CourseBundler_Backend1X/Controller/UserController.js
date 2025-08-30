@@ -20,8 +20,7 @@ export const Register = catchAsyncError(async (req, res, next) => {
   const fileUri = getDataUri(file);
 
   const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
-  const otp = Math.floor(1000 + Math.random() * 9000);
-  const otpExpiry = Date.now() + 24 * 60 * 60 * 1000;
+
 
   user = await User.create({
     name,
@@ -31,20 +30,15 @@ export const Register = catchAsyncError(async (req, res, next) => {
       public_id: mycloud.public_id,
       url: mycloud.secure_url,
     },
-    otp,
-    otpExpiry,
+
   });
 
 
-  await EmailVerification({
-    email : user.email,
-    subject : 'Email verification from coursebundler',
-    html:`<h1>Your OTP is ${otp}</h1>`
-  })
+  
   sendToken(
     res,
     user,
-    "OTP sent to email. Verify OTP to complete registration.",
+    "Register Successfully",
     201
   );
 });
