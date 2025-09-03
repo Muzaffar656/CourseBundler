@@ -161,7 +161,7 @@ export const subscriptionReducer = createReducer({},{
     buySubscriptionSuccess:(state,action)=>{
         state.loading = false
         state.sessionID  = action.payload
-        state.subMessage = 'Payment Done'
+  
     },
     buySubscriptionFail:(state,action)=>{
         state.loading = false
@@ -173,7 +173,7 @@ export const subscriptionReducer = createReducer({},{
     cancelSubscriptionSuccess:(state,action)=>{
     
         state.loading=false
-        state.subMessage=action.payload
+        state.message=action.payload
     },
     cancelSubscriptionFail:(state,action)=>{
         state.loading=false

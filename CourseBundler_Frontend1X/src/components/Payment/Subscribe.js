@@ -10,23 +10,26 @@ import {
 import {useDispatch,useSelector} from 'react-redux'
 import { buySubscription } from '../../Redux/actions/user';
 import toast from 'react-hot-toast'
+import Loader from '../Layout/Loader/Loader';
 const Subscribe = () => {
-  const {error,sessionID}= useSelector(state=> state.subscription)
+  const {error,sessionID,loading}= useSelector(state=> state.subscription)
   const dispatch = useDispatch()
 const checkout = async () =>{
  await dispatch(buySubscription())
 }
 
 useEffect(()=>{
-if(error){
-  toast.error(error)
-  dispatch({type:"clearError"})
-}
+
 if(sessionID){
   window.location = sessionID.subscriptionId.url
 }
 },[dispatch,error,sessionID])
   return (
+    <>
+{
+
+
+  loading ? <Loader/> :
     <Container h={'90vh'} p={'5'}>
       <Heading children={'Welcome'} my="8" textAlign={'center'} />
       <VStack boxShadow={'lg'} borderRadius={'lg'}>
@@ -64,6 +67,8 @@ if(sessionID){
         </Box>
       </VStack>
     </Container>
+    }
+      </>
   );
 };
 

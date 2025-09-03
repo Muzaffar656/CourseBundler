@@ -8,9 +8,11 @@ import { updateProfilePicture } from '../../Redux/actions/profile';
 import { CancelSubscription, loadUser } from '../../Redux/actions/user';
 import toast from 'react-hot-toast';
 import { removeFromPlaylist } from '../../Redux/actions/course';
-
+import Loader from './../Layout/Loader/Loader'
 const Profile = () => {
   const {loading} = useSelector(state=> state.profile)
+    const {error,sessionID,loading:subLoading}= useSelector(state=> state.subscription)
+    
   const {user} = useSelector(state=>state.user)
     const { loading:courseLoading } = useSelector(
       state => state.courses
@@ -39,7 +41,12 @@ const Profile = () => {
 
   }
   return (
-    <Container minH={'95vh'} maxW="container.lg" py="8">
+  <>
+
+{
+
+loading || subLoading || courseLoading ? <Loader/> : (
+        <Container minH={'95vh'} maxW="container.lg" py="8">
     <Heading children="Profile" m="8" textTransform={'uppercase'} />
 
     <Stack
@@ -143,8 +150,11 @@ const Profile = () => {
         changeImageSubmitHandler={changeImageSubmitHandler}
         loading={loading}
 />
-        </Container>
-  )
+        </Container> )
+}
+          </>
+      )
+  
 }
 
 

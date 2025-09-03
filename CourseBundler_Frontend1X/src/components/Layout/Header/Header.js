@@ -83,7 +83,9 @@ const Header = ({isAuthenticate = false , user}) => {
                 <VStack>
                   <HStack>
                     <Link to="/profile">
-                      <Button>Profile</Button>
+                      <Button 
+                        onClick={onClose}
+                      >Profile</Button>
                     </Link>
 
                     <Button onClick={logouthandler}>Logout</Button>

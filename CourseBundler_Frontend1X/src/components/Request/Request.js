@@ -25,18 +25,12 @@ const Request = () => {
   const handeRequest = e => {
     e.preventDefault();
     dispatch(courseRequest(name, email, course));
+    
     setCourse('');
     setEmail('');
     setName('');
   };
-  useEffect(() => {
-    if (message) {
-      toast.success(message);
-    }
-    if (error) {
-      toast.error(error);
-    }
-  }, [message, error,dispatch]);
+
   return (
     <Container h={'100vh'} mt={'0'}>
 {

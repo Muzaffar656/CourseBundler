@@ -19,19 +19,19 @@ const PaymentSuccess = () => {
 const [id,setId] = useState()
 const {user} = useSelector(state=>state.user)
 
-// let sessionID = user.subscription.session_id
-// const data = axios.post(`${server}/paymentverfication`,{sessionID},{
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-//   withCredentials: true
-// }).then(({data})=>{
-//   setId(data.subcriptionID)
-// })
+let sessionID = user.subscription.session_id
+const data = axios.post(`${server}/paymentverfication`,{sessionID},{
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  withCredentials: true
+}).then(({data})=>{
+  setId(data.subcriptionID)
+})
 
   return (
     <Container h={'90vh'} p={['5', '16']} mt={['8', '0']}>
-      <Heading children={'You Have Pro Pack'} mb={'2'} textAlign={'center'} />
+      <Heading children={'You Have Pro Pack'} mb={'8'} textAlign={'center'} />
       <VStack boxShadow={'lg'} borderRadius={'lg'} pb={['10', '16']}>
         <Box
           w={'full'}
@@ -56,7 +56,7 @@ const {user} = useSelector(state=>state.user)
           <Button variant={'ghost'}>Go to profile</Button>
         </Link>
 
-        {/* <Heading size={'xs'}>Reference: {id}</Heading> */}
+        <Heading size={'xs'}>Reference: {id}</Heading>
       </VStack>
     </Container>
   );

@@ -11,8 +11,9 @@ import {
     VStack,
   } from '@chakra-ui/react';
   import {Link} from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../Redux/actions/user';
+import Loader from '../Layout/Loader/Loader';
   export const fileUploadCss = {
     cursor: 'pointer',
     marginLeft: '-5%',
@@ -29,7 +30,7 @@ import { register } from '../../Redux/actions/user';
 
 const Register = () => {
 const dispatch = useDispatch()
-
+const {loading} = useSelector(state=>state.user)
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
     const [name,setName] = useState('')
@@ -60,6 +61,10 @@ const dispatch = useDispatch()
 
     }
   return (
+    <>
+    {
+      
+    loading ? (<Loader/>) : (
     <Container h={'100vh'} mt={'0'}>
       <VStack h={'full'} justifyContent="center" >
         <Heading textTransform={'uppercase'} ml={['4','0']} children={'REGISTRATION'} />
@@ -136,7 +141,9 @@ const dispatch = useDispatch()
           </Box>
         </form>
       </VStack>
-    </Container>
+    </Container> )
+    } 
+    </>
   )
 }
 

@@ -15,7 +15,6 @@ import {
   import toast from 'react-hot-toast'
 const Contact = () => {
   const dispatch = useDispatch()
-  const {message:mess,error} = useSelector(state=>state.other)
     const handelSubmit = e =>{
       e.preventDefault()
       dispatch(contactUs(name,email,message))
@@ -27,14 +26,7 @@ const Contact = () => {
     const [name,setName] = useState()
     const [email,setEmail] = useState()
     const [message,setMessage] = useState()
-    useEffect(()=>{
-      if(error){
-        toast.error(error)
-      }
-      if(mess){
-        toast.success(mess)
-      }
-    },[mess,error,dispatch])
+
   return (
     <Container h={'100vh'} mt={'0'}>
       <VStack h={'full'} justifyContent="center" >

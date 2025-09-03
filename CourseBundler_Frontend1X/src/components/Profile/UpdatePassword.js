@@ -15,9 +15,14 @@ const navigate = useNavigate()
     e.preventDefault()
     await dispatch(updateProfile(name,email))
     dispatch(loadUser())
+   
     navigate('/profile')
   }
   return (
+
+    <>
+      
+ 
     <Container py="16" minH={'90vh'}>
       <form onSubmit={submitHandler}>
         <Heading
@@ -46,13 +51,14 @@ const navigate = useNavigate()
             w="full"
             colorScheme={'yellow'}
             type="submit"
-            isLoading={loading}
+          
           >
             Update
           </Button>
         </VStack>
       </form>
     </Container>
+    </>
   )
 }
 

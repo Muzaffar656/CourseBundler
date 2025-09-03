@@ -10,14 +10,14 @@ const Founder = ()=>{
     <Stack direction={['column', 'row']} spacing={['4', '16']} padding={'8'}>
     <VStack>
       <Avatar
-        src="https://avatars.githubusercontent.com/u/25058652"
+        src="https://avatars.githubusercontent.com/u/106021084?s=400&u=ad83c8af36352b1923304108791f9a91ca0c3def&v=4"
         boxSize={['40', '48']}
       />
       <Text children="Co-Founder" opacity={0.7} />
     </VStack>
 
     <VStack justifyContent={'center'} alignItems={['center', 'flex-start']}>
-      <Heading children="Abhishek Singh" textAlign={['center','flex-start']} size={['md', 'xl']} />
+      <Heading children="Muzaffar Hussain" textAlign={['center','flex-start']} size={['md', 'xl']} />
       <Text
         textAlign={['center', 'left']}
         children={`Hi, I am a full-stack developer`}
@@ -92,7 +92,7 @@ const About = () => {
           size={'xs'}
           fontFamily="sans-serif"
           textTransform={'uppercase'}
-          children={'Payment is secured by Razorpay'}
+          children={'Payment is secured by Stripe'}
         />
       </HStack>
     </Container>

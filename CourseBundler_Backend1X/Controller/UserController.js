@@ -184,7 +184,7 @@ export const addToPlayList = catchAsyncError(async (req, res, next) => {
     if (item.course.toString() === course._id.toString()) return true;
   });
 
-  if (itemExists) return next(new ErrorHandler("item Already Exists", 409));
+  if (itemExists) return next(new ErrorHandler("Already in Playlist", 409));
 
   user.playlist.push({
     course: course._id,
