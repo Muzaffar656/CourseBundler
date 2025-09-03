@@ -19,5 +19,5 @@ const store = configureStore({
 
 export default store
 
-export const server =  process.env.REACT_APP_URL || 'http://localhost:7000/api/v1'
+export const server =  'https://coursebundler-b4kw.onrender.com/api/v1'
 // export const server = 'http://localhost:7000/api/v1'
