@@ -4,9 +4,9 @@
 
     const option = {
         expires:new Date(Date.now()+15 * 60 * 60* 1000),
-  httpOnly: false,
-  secure: false, // ✅ ONLY for localhost
-  sameSite: "lax", // or 'strict'
+  httpOnly: true,
+  secure: "production", // ✅ ONLY for localhost
+  sameSite: "none", // or 'strict'
     }
 
     
