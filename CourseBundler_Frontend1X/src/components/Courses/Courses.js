@@ -26,8 +26,10 @@ export const Course = ({
   description,
   lectureCount,
   loading,
-  user
+  user,
+  isLoading
 }) => {
+  
   return (
     <>
       <div className=" course items-start flex flex-col gap-1 mt-5">
@@ -73,7 +75,7 @@ export const Course = ({
             </Button>
           </Link>
           <Button
-            isLoading={loading}
+            isLoading={isLoading == id && isLoading}
             variant={'ghost'}
             colorScheme={'yellow'}
             onClick={() => addToPlaylistHandler(id)}
@@ -96,7 +98,7 @@ const Courses = () => {
   ];
   const [keyword, setKeyword] = useState();
   const [category, setCategory] = useState();
-
+const [isLoading,setIsLoading]= useState(false)
   const dispatch = useDispatch();
   const { loading, courses, error, message } = useSelector(
     state => state.courses
@@ -107,6 +109,7 @@ const Courses = () => {
     dispatch(getAllCourses(category, keyword,dispatch));
   }, [category, keyword]);
   const addToPlaylistHandler = async id => {
+    setIsLoading(id)
     if(!user){
       return toast.error('Please login',{
         duration:1000
@@ -114,14 +117,14 @@ const Courses = () => {
     }
    await dispatch(addToPlaylist(id));
 
- 
+ setIsLoading(false)
 
        dispatch(loadUser());
  
   };
   return (
     <div>
-      <div className=" max-w-xl py-8 m-auto items-start p-5 sm:p-0">
+      <div className=" max-w-5xl py-8 m-auto  p-5 sm:p-0">
         <h1 className="text-center text-2xl font-bold">All Courses</h1>
 
         <Input
@@ -142,7 +145,7 @@ const Courses = () => {
           ))}
         </HStack>
 
-        <div className="sm:flex-col flex flex-row justify-evenly items-center">
+        <div className=" flex flex-row  sm:grid sm:grid-cols-3  items-center">
           {courses.length > 0 ? (
             courses.map(item => (
               <Course
@@ -157,6 +160,7 @@ const Courses = () => {
                 lectureCount={item.numOfVideos}
                 loading={loading}
                 user={user}
+                isLoading={isLoading}
               />
             ))
           ) : (

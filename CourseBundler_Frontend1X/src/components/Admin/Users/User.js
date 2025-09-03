@@ -22,8 +22,10 @@ import {useSelector,useDispatch} from 'react-redux'
 import toast from 'react-hot-toast'
 import { changeRole, deleteUser, getAllUsers } from '../../../Redux/actions/admin';
 const User = () => {
+  const {user} = useSelector(state=>state.user)
   const dispatch = useDispatch()
   const updateHandler = (id)=>{
+   
     dispatch(changeRole(id))
   }
   const deleteButtonHandler = (id)=>{
@@ -31,16 +33,9 @@ const User = () => {
   }
   const {users,message,error} = useSelector(state=>state.admin) 
   useEffect(()=>{
-    if(message){
-      toast.success(message)
-      dispatch({type:'clearMessage'})
-    }
-    if(error){
-      toast.error(error)
-      dispatch({type:"clearError"})
-    }
+   
     dispatch(getAllUsers())
-  },[dispatch,message,error])
+  },[dispatch])
   return (
     <Grid
       css={{

@@ -62,15 +62,8 @@ const AdminCourses = () => {
   };
   useEffect(() => {
     dispatch(getAllCourses());
-    if (message) {
-      toast.success(message);
-      dispatch({ type: 'clearMessage' });
-    }
-    if (error) {
-      toast.error(error);
-      dispatch({ type: 'clearError' });
-    }
-  }, [dispatch, message, error, onClose]);
+ 
+  }, [dispatch,onClose]);
 
   return (
     <Grid

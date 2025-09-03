@@ -19,7 +19,7 @@ import Sidebar from '../Sidebar'
 import {useDispatch,useSelector} from 'react-redux'
 import { createCourse } from '../../../Redux/actions/admin';
 import toast from 'react-hot-toast'
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 export const fileUploadCss = {
   cursor: 'pointer',
   marginLeft: '-5%',
@@ -31,6 +31,7 @@ export const fileUploadCss = {
 };
 
 const CreateCourse = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const {message,error,loading} = useSelector(state=>state.admin)
   const [title,setTitle] = useState('')
@@ -62,7 +63,7 @@ const CreateCourse = () => {
 setImage(file)
     };
   };
-  const handelSubmit = e=>{
+  const handelSubmit =async e=>{
     e.preventDefault()
     const myform = new FormData()
     myform.append('title',title)
@@ -70,19 +71,14 @@ setImage(file)
     myform.append('category',category)
     myform.append('createdBy',createdBy)
     myform.append('file',image)
-    dispatch(createCourse(myform))
-return <Navigate to={'/admin/courses'}/>
+   const result = await dispatch(createCourse(myform))
+ if(result.success){
+  navigate('/admin/courses')
+ }
+
+
   }
-  useEffect(()=>{
-    if(message){
-      toast.success(message)
-      dispatch({type:"clearMessage"})
-    }
-    if(error){
-      toast.error(error)
-      dispatch({type:"clearError"})
-    }
-  },[dispatch,message,error,loading])
+
   return (
     <Grid
       css={{

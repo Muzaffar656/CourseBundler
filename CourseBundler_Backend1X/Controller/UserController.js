@@ -230,7 +230,7 @@ export const getAllUsers = catchAsyncError(async (req, res, next) => {
 export const UpdateUserRole = catchAsyncError(async (req, res, next) => {
   const user = await User.findById(req.params.id);
   if (!user) return next(new ErrorHandler("User not found", 404));
-
+if(user.role === 'admin') return next(new ErrorHandler("You cannot change your own role"))
   if (user.role === "user") user.role = "admin";
   else user.role = "user";
 

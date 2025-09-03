@@ -23,7 +23,12 @@ export  const createCourse = (myform)=>async dispatch=>{
             },
             withCredentials:true
         })
-        dispatch({type:"createCourseSuccess",payload:data.message})
+        dispatch({type:"createCourseSuccess",payload:data.message}
+        
+        )
+        return { 
+            success: true
+        }
     } catch (error) {
         dispatch({type:"createCourseFail",payload:error.response.data.message})
     }

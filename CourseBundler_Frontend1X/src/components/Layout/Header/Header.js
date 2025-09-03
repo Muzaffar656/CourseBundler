@@ -29,6 +29,7 @@ const Header = ({isAuthenticate = false , user}) => {
 
   const logouthandler = () => {
   dispatch(logout())
+  onClose()
   };
 
   return (
@@ -93,7 +94,7 @@ const Header = ({isAuthenticate = false , user}) => {
 
                   {user && user.role === 'admin' && (
                     <Link to="/admin/dashboard">
-                      <Button colorScheme={'purple'} variant="ghost">
+                      <Button onClick={onClose} colorScheme={'purple'} variant="ghost">
                         <RiDashboardFill style={{ margin: '4px' }} />
                         Dashboard
                       </Button>

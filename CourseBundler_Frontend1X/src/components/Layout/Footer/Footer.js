@@ -15,7 +15,7 @@ const Footer = () => {
           <Heading
             fontFamily={'body'}
             size="sm"
-            children="@6 Pack Programmer"
+            
             color={'yellow.400'}
           />
         </VStack>

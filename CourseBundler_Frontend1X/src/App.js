@@ -163,7 +163,7 @@ const ProtectedRoute = ({ children }) => {
             />
             <Route
               path="/admin/users"
-              element={user && user.role === 'admin' ? <User /> : <Login />}
+              element={user && user.role === 'admin' ? <User /> :  <Navigate to={"/login"} replace />}
             />
             <Route
               path="/admin/courses"
