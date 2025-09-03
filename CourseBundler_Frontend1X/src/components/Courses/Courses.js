@@ -109,12 +109,13 @@ const [isLoading,setIsLoading]= useState(false)
     dispatch(getAllCourses(category, keyword,dispatch));
   }, [category, keyword]);
   const addToPlaylistHandler = async id => {
-    setIsLoading(id)
+  
     if(!user){
       return toast.error('Please login',{
         duration:1000
       })
     }
+      setIsLoading(id)
    await dispatch(addToPlaylist(id));
 
  setIsLoading(false)
