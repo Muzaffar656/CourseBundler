@@ -15,7 +15,7 @@ import { getAllCourses } from '../../Redux/actions/course';
 import { toast } from 'react-hot-toast';
 import { addToPlaylist } from '../../Redux/actions/course';
 import { loadUser } from '../../Redux/actions/user';
-
+import Loader from '../Layout/Loader/Loader'
 export const Course = ({
   views,
   title,
@@ -124,7 +124,10 @@ const [isLoading,setIsLoading]= useState(false)
  
   };
   return (
+
     <div>
+    {
+      loading ? <Loader/> :
       <div className=" max-w-5xl py-8 m-auto  p-5 sm:p-0">
         <h1 className="text-center text-2xl font-bold">All Courses</h1>
 
@@ -169,6 +172,7 @@ const [isLoading,setIsLoading]= useState(false)
           )}
         </div>
       </div>
+    }
     </div>
   );
 };
