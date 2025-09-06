@@ -29,6 +29,7 @@ import toast,{Toaster} from 'react-hot-toast'
 import {loadUser} from './Redux/actions/user'
 import Loader from './components/Layout/Loader/Loader';
 import VerifyEmail from './components/Auth/VerifyEmail';
+import axios from "axios";
 
 import Cookies from "js-cookie";
 function App() {
@@ -58,7 +59,14 @@ const dispatch = useDispatch();
   });
   }, [allReducers, dispatch,error,message]);
 
- useEffect(() => { const token = Cookies.get("token"); if (token) { dispatch(loadUser()); } }, [dispatch]);
+
+// set global config once
+axios.defaults.withCredentials = true;
+
+useEffect(() => {
+  dispatch(loadUser()); // no need to manually get cookie
+}, [dispatch]);
+
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticate, user, loading } = useSelector((state) => state.user);
 
